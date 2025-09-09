@@ -1,0 +1,10 @@
+# compile vhdl design source files
+vhdl xil_defaultlib  \
+"../../../../fm3.gen/sources_1/ip/mult_gen_0/sim/mult_gen_0.vhd" \
+"../../../../fm3.srcs/sources_1/new/multacc.vhd" \
+"../../../../fm3.srcs/sources_1/new/counter.vhd" \
+"../../../../fm3.srcs/sources_1/new/axi_dotprod.vhd" \
+"../../../../fm3.srcs/sim_1/new/axi_dotprod_4_tb.vhd" \
+
+# Do not sort compile order
+nosort

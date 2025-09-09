@@ -1,0 +1,641 @@
+/*
+ * Copyright (C) 2009 - 2019 Xilinx, Inc.
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without modification,
+ * are permitted provided that the following conditions are met:
+ *
+ * 1. Redistributions of source code must retain the above copyright notice,
+ *    this list of conditions and the following disclaimer.
+ * 2. Redistributions in binary form must reproduce the above copyright notice,
+ *    this list of conditions and the following disclaimer in the documentation
+ *    and/or other materials provided with the distribution.
+ * 3. The name of the author may not be used to endorse or promote products
+ *    derived from this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+ * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT
+ * SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT
+ * OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING
+ * IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+ * OF SUCH DAMAGE.
+ *
+ */
+
+#include <stdio.h>
+#include <string.h>
+
+#include "lwip/err.h"
+#include "lwip/tcp.h"
+#if defined (__arm__) || defined (__aarch64__)
+#include "xil_printf.h"
+#endif
+#include "xscutimer.h"
+#include "xscugic.h"
+#include "xaxidma.h"
+#include "xgpio.h"
+#include "xil_util.h"
+#include "platform.h"
+
+extern XScuTimer TimerInstance;
+extern u8 *DmaTxBufferPtr;
+extern u8 *DmaRxBufferPtr;
+extern XScuGic Interrupt;
+extern XAxiDma AxiDma;
+extern XGpio Gpio;
+extern u32_t tx_buf_i;
+extern u32_t tx_buffer[8];
+extern u32_t init_buffer[16];
+extern u32_t init_buf_i;
+extern u32_t a_rows;
+extern u32_t a_cols;
+extern u32_t b_cols;
+extern u32_t fraction_bits;
+extern struct tcp_pcb* pcb;
+extern volatile u32 DmaTxDone;
+extern volatile u32 DmaRxDone;
+extern volatile u32 DmaRxFinal;
+
+u32_t curr_a_col = 0;
+u32_t curr_a_row = 0;
+u32_t curr_b_col = 0;
+int countdown = 8;
+u32_t rx_a_col = 0;
+int Status;
+u32_t rx_pending = 0;
+int firstrxdone = 0;
+int firstrxinitiated = 0;
+int rx_delay;
+int transfer_data() {
+	return 0;
+}
+
+void print_app_header()
+{
+#if (LWIP_IPV6==0)
+	xil_printf("\n\r\n\r-----lwIP TCP Matrix Multiplication ------\n\r");
+#else
+	xil_printf("\n\r\n\r-----lwIPv6 TCP Matrix Multiplication ------\n\r");
+#endif
+}
+
+err_t recv_callback(void *arg, struct tcp_pcb *tpcb,
+                               struct pbuf *p, err_t err)
+{
+	/* do not read the packet if we are not in ESTABLISHED state */
+	if (!p) {
+		tcp_close(tpcb);
+		tcp_recv(tpcb, NULL);
+		xil_printf("TCP connection is not established\r\n");
+		return ERR_OK;
+	}
+
+	/* indicate that the packet has been received */
+	tcp_recved(tpcb, p->len);
+
+	for (u16_t i = 0; i < p->len; ++i) {
+		tx_buffer[tx_buf_i] = (u32_t)(pbuf_get_at(p, i));
+		tx_buf_i++;
+		if (tx_buf_i > 7) {
+			tx_buf_i = 0;
+			u32_t tdata_a = (tx_buffer[0]) | (tx_buffer[1] << 8) |
+							(tx_buffer[2] << 16) | (tx_buffer[3] << 24);
+			u32_t tdata_b = (tx_buffer[4]) | (tx_buffer[5] << 8) |
+							(tx_buffer[6] << 16) | (tx_buffer[7] << 24);
+			tdata_a = lwip_ntohl(tdata_a);
+			tdata_b = lwip_ntohl(tdata_b);
+			DmaTxBufferPtr[7] = (u8)(tdata_a >> 24);
+			DmaTxBufferPtr[6] = (u8)(tdata_a >> 16);
+			DmaTxBufferPtr[5] = (u8)(tdata_a >> 8);
+			DmaTxBufferPtr[4] = (u8)(tdata_a);
+			DmaTxBufferPtr[3] = (u8)(tdata_b >> 24);
+			DmaTxBufferPtr[2] = (u8)(tdata_b >> 16);
+			DmaTxBufferPtr[1] = (u8)(tdata_b >> 8);
+			DmaTxBufferPtr[0] = (u8)(tdata_b);
+			Xil_DCacheFlushRange((UINTPTR) DmaTxBufferPtr, 8);
+			Status = XAxiDma_SimpleTransfer(&AxiDma, (UINTPTR) DmaTxBufferPtr,
+					8, XAXIDMA_DMA_TO_DEVICE);
+			if (Status != XST_SUCCESS) {
+				xil_printf("Failed to transfer data to AXI DMA %d\r\n", Status);
+				tcp_abort(tpcb);
+				XScuTimer_Stop(&TimerInstance);
+		    	XScuGic_Disconnect(&Interrupt, XPAR_FABRIC_AXIDMA_0_MM2S_INTROUT_VEC_ID);
+		    	XScuGic_Disconnect(&Interrupt, XPAR_FABRIC_AXIDMA_0_S2MM_INTROUT_VEC_ID);
+		       	XGpio_InterruptDisable(&Gpio, XGPIO_IR_MASK);
+		     	XScuGic_Disable(&Interrupt, XPAR_FABRIC_GPIO_0_VEC_ID);
+		     	XScuGic_Disconnect(&Interrupt, XPAR_FABRIC_GPIO_0_VEC_ID);
+		     	cleanup_platform();
+				return ERR_ABRT;
+			}
+			Status = Xil_WaitForEventSet(1000000U, 1, &DmaTxDone);
+			if (Status != XST_SUCCESS) {
+				if (!DmaTxDone) {
+					xil_printf("DMA TxDone is not 1, Status: %d\r\n", Status);
+					tcp_abort(tpcb);
+			    	XScuTimer_Stop(&TimerInstance);
+			    	XScuGic_Disconnect(&Interrupt, XPAR_FABRIC_AXIDMA_0_MM2S_INTROUT_VEC_ID);
+			    	XScuGic_Disconnect(&Interrupt, XPAR_FABRIC_AXIDMA_0_S2MM_INTROUT_VEC_ID);
+			       	XGpio_InterruptDisable(&Gpio, XGPIO_IR_MASK);
+			     	XScuGic_Disable(&Interrupt, XPAR_FABRIC_GPIO_0_VEC_ID);
+			     	XScuGic_Disconnect(&Interrupt, XPAR_FABRIC_GPIO_0_VEC_ID);
+			     	cleanup_platform();
+					return ERR_ABRT;
+				}
+			}
+			DmaTxDone = 0;
+
+			if (countdown) {
+				countdown--;
+			} else {
+				if (firstrxdone) {
+					if (!rx_a_col) {
+						Status = XAxiDma_SimpleTransfer(&AxiDma, (UINTPTR) DmaRxBufferPtr,
+						4, XAXIDMA_DEVICE_TO_DMA);
+						if (Status != XST_SUCCESS) {
+							xil_printf("Failed to receive data from AXI DMA %d\r\n", Status);
+							tcp_abort(tpcb);
+					    	XScuTimer_Stop(&TimerInstance);
+					    	XScuGic_Disconnect(&Interrupt, XPAR_FABRIC_AXIDMA_0_MM2S_INTROUT_VEC_ID);
+					    	XScuGic_Disconnect(&Interrupt, XPAR_FABRIC_AXIDMA_0_S2MM_INTROUT_VEC_ID);
+					       	XGpio_InterruptDisable(&Gpio, XGPIO_IR_MASK);
+					     	XScuGic_Disable(&Interrupt, XPAR_FABRIC_GPIO_0_VEC_ID);
+					     	XScuGic_Disconnect(&Interrupt, XPAR_FABRIC_GPIO_0_VEC_ID);
+					     	cleanup_platform();
+							return ERR_ABRT;
+						}
+					}
+				}
+				rx_a_col++;
+				if (rx_a_col == a_cols) {
+					rx_a_col = 0;
+					xil_printf("RX DMA initiated\r\n");
+					Status = Xil_WaitForEventSet(1000000U, 1, &DmaRxDone);
+					if (Status == XST_SUCCESS) {
+						if (!DmaRxDone) {
+							xil_printf("DMA RX timed out, Status: %d\r\n", Status);
+							tcp_abort(tpcb);
+					    	XScuTimer_Stop(&TimerInstance);
+					    	XScuGic_Disconnect(&Interrupt, XPAR_FABRIC_AXIDMA_0_MM2S_INTROUT_VEC_ID);
+					    	XScuGic_Disconnect(&Interrupt, XPAR_FABRIC_AXIDMA_0_S2MM_INTROUT_VEC_ID);
+					       	XGpio_InterruptDisable(&Gpio, XGPIO_IR_MASK);
+					     	XScuGic_Disable(&Interrupt, XPAR_FABRIC_GPIO_0_VEC_ID);
+					     	XScuGic_Disconnect(&Interrupt, XPAR_FABRIC_GPIO_0_VEC_ID);
+					     	cleanup_platform();
+							return ERR_ABRT;
+						}
+					}
+					DmaRxDone = 0;
+				}
+			}
+
+			curr_a_col++;
+			if (curr_a_col == a_cols) {
+				// rx_pending++;
+				curr_b_col++;
+				if (curr_b_col == b_cols) {
+					curr_a_row++;
+					if (curr_a_row == a_rows) {
+						for (int i = 0; i < 8; ++i) {
+							DmaTxBufferPtr[i] = (u8) 0;
+						}
+						Xil_DCacheFlushRange((UINTPTR) DmaTxBufferPtr, 8);
+						while (!DmaRxFinal) {
+							Status = XAxiDma_SimpleTransfer(&AxiDma, (UINTPTR) DmaTxBufferPtr,
+									8, XAXIDMA_DMA_TO_DEVICE);
+							if (Status != XST_SUCCESS) {
+								xil_printf("Failed to transfer data to AXI DMA %d\r\n", Status);
+								tcp_abort(tpcb);
+						    	XScuTimer_Stop(&TimerInstance);
+						    	XScuGic_Disconnect(&Interrupt, XPAR_FABRIC_AXIDMA_0_MM2S_INTROUT_VEC_ID);
+						    	XScuGic_Disconnect(&Interrupt, XPAR_FABRIC_AXIDMA_0_S2MM_INTROUT_VEC_ID);
+						       	XGpio_InterruptDisable(&Gpio, XGPIO_IR_MASK);
+						     	XScuGic_Disable(&Interrupt, XPAR_FABRIC_GPIO_0_VEC_ID);
+						     	XScuGic_Disconnect(&Interrupt, XPAR_FABRIC_GPIO_0_VEC_ID);
+						     	cleanup_platform();
+								return ERR_ABRT;
+							}
+							Status = Xil_WaitForEventSet(1000000U, 1, &DmaTxDone);
+							if (Status != XST_SUCCESS) {
+								if (!DmaTxDone) {
+									xil_printf("DMA TxDone is not 1, Status: %d\r\n", Status);
+									tcp_abort(tpcb);
+							    	XScuTimer_Stop(&TimerInstance);
+							    	XScuGic_Disconnect(&Interrupt, XPAR_FABRIC_AXIDMA_0_MM2S_INTROUT_VEC_ID);
+							    	XScuGic_Disconnect(&Interrupt, XPAR_FABRIC_AXIDMA_0_S2MM_INTROUT_VEC_ID);
+							       	XGpio_InterruptDisable(&Gpio, XGPIO_IR_MASK);
+							     	XScuGic_Disable(&Interrupt, XPAR_FABRIC_GPIO_0_VEC_ID);
+							     	XScuGic_Disconnect(&Interrupt, XPAR_FABRIC_GPIO_0_VEC_ID);
+							     	cleanup_platform();
+									return ERR_ABRT;
+								}
+							}
+							DmaTxDone = 0;
+
+							if (countdown) {
+								countdown--;
+							} else {
+								if (firstrxdone) {
+									if (!rx_a_col) {
+										Status = XAxiDma_SimpleTransfer(&AxiDma, (UINTPTR) DmaRxBufferPtr,
+										4, XAXIDMA_DEVICE_TO_DMA);
+										if (Status != XST_SUCCESS) {
+											xil_printf("Failed to receive data from AXI DMA %d\r\n", Status);
+											tcp_abort(tpcb);
+									    	XScuTimer_Stop(&TimerInstance);
+									    	XScuGic_Disconnect(&Interrupt, XPAR_FABRIC_AXIDMA_0_MM2S_INTROUT_VEC_ID);
+									    	XScuGic_Disconnect(&Interrupt, XPAR_FABRIC_AXIDMA_0_S2MM_INTROUT_VEC_ID);
+									       	XGpio_InterruptDisable(&Gpio, XGPIO_IR_MASK);
+									     	XScuGic_Disable(&Interrupt, XPAR_FABRIC_GPIO_0_VEC_ID);
+									     	XScuGic_Disconnect(&Interrupt, XPAR_FABRIC_GPIO_0_VEC_ID);
+									     	cleanup_platform();
+											return ERR_ABRT;
+										}
+									}
+								}
+								rx_a_col++;
+								if (rx_a_col == a_cols) {
+									rx_a_col = 0;
+									xil_printf("RX DMA initiated\r\n");
+									Status = Xil_WaitForEventSet(1000000U, 1, &DmaRxDone);
+									if (Status == XST_SUCCESS) {
+										if (!DmaRxDone) {
+											xil_printf("DMA RX timed out, Status: %d\r\n", Status);
+											tcp_abort(tpcb);
+									    	XScuTimer_Stop(&TimerInstance);
+									    	XScuGic_Disconnect(&Interrupt, XPAR_FABRIC_AXIDMA_0_MM2S_INTROUT_VEC_ID);
+									    	XScuGic_Disconnect(&Interrupt, XPAR_FABRIC_AXIDMA_0_S2MM_INTROUT_VEC_ID);
+									       	XGpio_InterruptDisable(&Gpio, XGPIO_IR_MASK);
+									     	XScuGic_Disable(&Interrupt, XPAR_FABRIC_GPIO_0_VEC_ID);
+									     	XScuGic_Disconnect(&Interrupt, XPAR_FABRIC_GPIO_0_VEC_ID);
+									     	cleanup_platform();
+											return ERR_ABRT;
+										}
+									}
+									DmaRxDone = 0;
+								}
+							}
+						}
+						xil_printf("Matrix calculation complete\r\n");
+						return ERR_OK;
+					}
+					curr_b_col = 0;
+				}
+				curr_a_col = 0;
+			}
+		}
+	}
+
+	/* free the received pbuf */
+	pbuf_free(p);
+	return ERR_OK;
+}
+
+err_t recv_callback_init(void *arg, struct tcp_pcb *tpcb,
+								 struct pbuf *p, err_t err)
+{
+	/* do not read the packet if we are not in ESTABLISHED state */
+	if (!p) {
+		tcp_close(tpcb);
+		tcp_recv(tpcb, NULL);
+		xil_printf("TCP connection is not established\r\n");
+		return ERR_OK;
+	}
+
+	/* indicate that the packet has been received */
+	tcp_recved(tpcb, p->len);
+
+	for (u16_t i = 0; i < p->len; ++i) {
+		if (init_buf_i > 15) {
+			tx_buffer[tx_buf_i] = (u32_t)(pbuf_get_at(p, i));
+			tx_buf_i++;
+			if (tx_buf_i > 7) {
+				tx_buf_i = 0;
+				u32_t tdata_a = (tx_buffer[0]) | (tx_buffer[1] << 8) |
+								(tx_buffer[2] << 16) | (tx_buffer[3] << 24);
+				u32_t tdata_b = (tx_buffer[4]) | (tx_buffer[5] << 8) |
+								(tx_buffer[6] << 16) | (tx_buffer[7] << 24);
+				tdata_a = lwip_ntohl(tdata_a);
+				tdata_b = lwip_ntohl(tdata_b);
+				DmaTxBufferPtr[7] = (u8)(tdata_a >> 24);
+				DmaTxBufferPtr[6] = (u8)(tdata_a >> 16);
+				DmaTxBufferPtr[5] = (u8)(tdata_a >> 8);
+				DmaTxBufferPtr[4] = (u8)(tdata_a);
+				DmaTxBufferPtr[3] = (u8)(tdata_b >> 24);
+				DmaTxBufferPtr[2] = (u8)(tdata_b >> 16);
+				DmaTxBufferPtr[1] = (u8)(tdata_b >> 8);
+				DmaTxBufferPtr[0] = (u8)(tdata_b);
+				Xil_DCacheFlushRange((UINTPTR) DmaTxBufferPtr, 8);
+				int Status = XAxiDma_SimpleTransfer(&AxiDma, (UINTPTR) DmaTxBufferPtr,
+						8, XAXIDMA_DMA_TO_DEVICE);
+				if (Status != XST_SUCCESS) {
+					xil_printf("Failed to transfer data to AXI DMA %d\r\n", Status);
+					tcp_abort(tpcb);
+			    	XScuTimer_Stop(&TimerInstance);
+			    	XScuGic_Disconnect(&Interrupt, XPAR_FABRIC_AXIDMA_0_MM2S_INTROUT_VEC_ID);
+			    	XScuGic_Disconnect(&Interrupt, XPAR_FABRIC_AXIDMA_0_S2MM_INTROUT_VEC_ID);
+			       	XGpio_InterruptDisable(&Gpio, XGPIO_IR_MASK);
+			     	XScuGic_Disable(&Interrupt, XPAR_FABRIC_GPIO_0_VEC_ID);
+			     	XScuGic_Disconnect(&Interrupt, XPAR_FABRIC_GPIO_0_VEC_ID);
+			     	cleanup_platform();
+					return ERR_ABRT;
+				}
+				Status = Xil_WaitForEventSet(1000000U, 1, &DmaTxDone);
+				if (Status == XST_SUCCESS) {
+					if (!DmaTxDone) {
+						xil_printf("DMA TxDone is not 1, Status: %d\r\n", Status);
+						tcp_abort(tpcb);
+				    	XScuTimer_Stop(&TimerInstance);
+				    	XScuGic_Disconnect(&Interrupt, XPAR_FABRIC_AXIDMA_0_MM2S_INTROUT_VEC_ID);
+				    	XScuGic_Disconnect(&Interrupt, XPAR_FABRIC_AXIDMA_0_S2MM_INTROUT_VEC_ID);
+				       	XGpio_InterruptDisable(&Gpio, XGPIO_IR_MASK);
+				     	XScuGic_Disable(&Interrupt, XPAR_FABRIC_GPIO_0_VEC_ID);
+				     	XScuGic_Disconnect(&Interrupt, XPAR_FABRIC_GPIO_0_VEC_ID);
+				     	cleanup_platform();
+						return ERR_ABRT;
+					}
+				}
+				DmaTxDone = 0;
+
+				if (countdown) {
+					countdown--;
+				} else {
+					if (firstrxdone) {
+						if (!rx_a_col) {
+							Status = XAxiDma_SimpleTransfer(&AxiDma, (UINTPTR) DmaRxBufferPtr,
+							4, XAXIDMA_DEVICE_TO_DMA);
+							if (Status != XST_SUCCESS) {
+								xil_printf("Failed to receive data from AXI DMA %d\r\n", Status);
+								tcp_abort(tpcb);
+						    	XScuTimer_Stop(&TimerInstance);
+						    	XScuGic_Disconnect(&Interrupt, XPAR_FABRIC_AXIDMA_0_MM2S_INTROUT_VEC_ID);
+						    	XScuGic_Disconnect(&Interrupt, XPAR_FABRIC_AXIDMA_0_S2MM_INTROUT_VEC_ID);
+						       	XGpio_InterruptDisable(&Gpio, XGPIO_IR_MASK);
+						     	XScuGic_Disable(&Interrupt, XPAR_FABRIC_GPIO_0_VEC_ID);
+						     	XScuGic_Disconnect(&Interrupt, XPAR_FABRIC_GPIO_0_VEC_ID);
+						     	cleanup_platform();
+								return ERR_ABRT;
+							}
+						}
+					}
+					rx_a_col++;
+					if (rx_a_col == a_cols) {
+						rx_a_col = 0;
+						xil_printf("RX DMA initiated\r\n");
+						Status = Xil_WaitForEventSet(1000000U, 1, &DmaRxDone);
+						if (Status == XST_SUCCESS) {
+							if (!DmaRxDone) {
+								xil_printf("DMA RX timed out, Status: %d\r\n", Status);
+								tcp_abort(tpcb);
+						    	XScuTimer_Stop(&TimerInstance);
+						    	XScuGic_Disconnect(&Interrupt, XPAR_FABRIC_AXIDMA_0_MM2S_INTROUT_VEC_ID);
+						    	XScuGic_Disconnect(&Interrupt, XPAR_FABRIC_AXIDMA_0_S2MM_INTROUT_VEC_ID);
+						       	XGpio_InterruptDisable(&Gpio, XGPIO_IR_MASK);
+						     	XScuGic_Disable(&Interrupt, XPAR_FABRIC_GPIO_0_VEC_ID);
+						     	XScuGic_Disconnect(&Interrupt, XPAR_FABRIC_GPIO_0_VEC_ID);
+						     	cleanup_platform();
+								return ERR_ABRT;
+							}
+						}
+						DmaRxDone = 0;
+					}
+				}
+
+				curr_a_col++;
+				if (curr_a_col == a_cols) {
+					// rx_pending++;
+					curr_b_col++;
+					if (curr_b_col == b_cols) {
+						curr_a_row++;
+						if (curr_a_row == a_rows) {
+							// just use DmaRxDone as a signal that
+							// all of the data from the PL have been received
+							for (int i = 0; i < 8; ++i) {
+								DmaTxBufferPtr[i] = 0;
+							}
+							while (!DmaRxFinal) {
+								Status = XAxiDma_SimpleTransfer(&AxiDma, (UINTPTR) DmaTxBufferPtr,
+										8, XAXIDMA_DMA_TO_DEVICE);
+								if (Status != XST_SUCCESS) {
+									xil_printf("Failed to transfer data to AXI DMA %d\r\n", Status);
+									tcp_abort(tpcb);
+							    	XScuTimer_Stop(&TimerInstance);
+							    	XScuGic_Disconnect(&Interrupt, XPAR_FABRIC_AXIDMA_0_MM2S_INTROUT_VEC_ID);
+							    	XScuGic_Disconnect(&Interrupt, XPAR_FABRIC_AXIDMA_0_S2MM_INTROUT_VEC_ID);
+							       	XGpio_InterruptDisable(&Gpio, XGPIO_IR_MASK);
+							     	XScuGic_Disable(&Interrupt, XPAR_FABRIC_GPIO_0_VEC_ID);
+							     	XScuGic_Disconnect(&Interrupt, XPAR_FABRIC_GPIO_0_VEC_ID);
+							     	cleanup_platform();
+									return ERR_ABRT;
+								}
+								Status = Xil_WaitForEventSet(1000000U, 1, &DmaTxDone);
+								if (Status != XST_SUCCESS) {
+									if (!DmaTxDone) {
+										xil_printf("DMA TxDone is not 1, Status: %d\r\n", Status);
+										tcp_abort(tpcb);
+								    	XScuTimer_Stop(&TimerInstance);
+								    	XScuGic_Disconnect(&Interrupt, XPAR_FABRIC_AXIDMA_0_MM2S_INTROUT_VEC_ID);
+								    	XScuGic_Disconnect(&Interrupt, XPAR_FABRIC_AXIDMA_0_S2MM_INTROUT_VEC_ID);
+								       	XGpio_InterruptDisable(&Gpio, XGPIO_IR_MASK);
+								     	XScuGic_Disable(&Interrupt, XPAR_FABRIC_GPIO_0_VEC_ID);
+								     	XScuGic_Disconnect(&Interrupt, XPAR_FABRIC_GPIO_0_VEC_ID);
+								     	cleanup_platform();
+										return ERR_ABRT;
+									}
+								}
+								DmaTxDone = 0;
+
+								if (countdown) {
+									countdown--;
+								} else {
+									if (firstrxdone) {
+										if (!rx_a_col) {
+											Status = XAxiDma_SimpleTransfer(&AxiDma, (UINTPTR) DmaRxBufferPtr,
+											4, XAXIDMA_DEVICE_TO_DMA);
+											if (Status != XST_SUCCESS) {
+												xil_printf("Failed to receive data from AXI DMA %d\r\n", Status);
+												tcp_abort(tpcb);
+										    	XScuTimer_Stop(&TimerInstance);
+										    	XScuGic_Disconnect(&Interrupt, XPAR_FABRIC_AXIDMA_0_MM2S_INTROUT_VEC_ID);
+										    	XScuGic_Disconnect(&Interrupt, XPAR_FABRIC_AXIDMA_0_S2MM_INTROUT_VEC_ID);
+										       	XGpio_InterruptDisable(&Gpio, XGPIO_IR_MASK);
+										     	XScuGic_Disable(&Interrupt, XPAR_FABRIC_GPIO_0_VEC_ID);
+										     	XScuGic_Disconnect(&Interrupt, XPAR_FABRIC_GPIO_0_VEC_ID);
+										     	cleanup_platform();
+												return ERR_ABRT;
+											}
+										}
+									}
+									rx_a_col++;
+									if (rx_a_col == a_cols) {
+										rx_a_col = 0;
+										xil_printf("RX DMA initiated\r\n");
+										Status = Xil_WaitForEventSet(1000000U, 1, &DmaRxDone);
+										if (Status == XST_SUCCESS) {
+											if (!DmaRxDone) {
+												xil_printf("DMA RX timed out, Status: %d\r\n", Status);
+												tcp_abort(tpcb);
+										    	XScuTimer_Stop(&TimerInstance);
+										    	XScuGic_Disconnect(&Interrupt, XPAR_FABRIC_AXIDMA_0_MM2S_INTROUT_VEC_ID);
+										    	XScuGic_Disconnect(&Interrupt, XPAR_FABRIC_AXIDMA_0_S2MM_INTROUT_VEC_ID);
+										       	XGpio_InterruptDisable(&Gpio, XGPIO_IR_MASK);
+										     	XScuGic_Disable(&Interrupt, XPAR_FABRIC_GPIO_0_VEC_ID);
+										     	XScuGic_Disconnect(&Interrupt, XPAR_FABRIC_GPIO_0_VEC_ID);
+										     	cleanup_platform();
+												return ERR_ABRT;
+											}
+										}
+										DmaRxDone = 0;
+									}
+								}
+							}
+							xil_printf("Matrix calculation complete\r\n");
+							return ERR_OK;
+						}
+						curr_b_col = 0;
+					}
+					curr_a_col = 0;
+				}
+			}
+		} else {
+			init_buffer[init_buf_i] = (u32_t)(pbuf_get_at(p, i));
+			init_buf_i++;
+			if (init_buf_i == 16) {
+				a_rows = (init_buffer[0]) | (init_buffer[1] << 8) |
+						(init_buffer[2] << 16) | (init_buffer[3] << 24);
+				a_rows = lwip_ntohl(a_rows);
+				a_cols = (init_buffer[4]) | (init_buffer[5] << 8) |
+						(init_buffer[6] << 16) | (init_buffer[7] << 24);
+				a_cols = lwip_ntohl(a_cols);
+				b_cols = (init_buffer[8]) | (init_buffer[9] << 8) |
+						(init_buffer[10] << 16) | (init_buffer[11] << 24);
+				b_cols = lwip_ntohl(b_cols);
+				fraction_bits = (init_buffer[12]) | (init_buffer[13] << 8) |
+						(init_buffer[14] << 16) | (init_buffer[15] << 24);
+				fraction_bits = lwip_ntohl(fraction_bits);
+
+				/* The DMA S2MM interrupt is raised high several TX cycles after
+				 * the S2MM TREADY is raised. This causes the DMA engine to
+				 * receive the first number 6 unnecessary times if a_cols == 1
+				 * and 3 unnecessary times otherwise. */
+				if (a_cols == 1) {
+					rx_delay = 6;
+				} else {
+					rx_delay = 3;
+				}
+				XGpio_DiscreteWrite(&Gpio, 1, fraction_bits);
+				XGpio_DiscreteWrite(&Gpio, 2, a_cols);
+				// disable FCLK_RESET1_N
+			    Xil_Out32(0xF8000008, 0x0000DF0D);
+				Xil_Out32(0xF8000240, 0x00000000);
+				/* Initiate first S2MM DMA transfer */
+				xil_printf("RX SimpleTransfer initiated\r\n");
+				int Status = XAxiDma_SimpleTransfer(&AxiDma, (UINTPTR) DmaRxBufferPtr,
+	    		4, XAXIDMA_DEVICE_TO_DMA);
+				if (Status != XST_SUCCESS) {
+					xil_printf("Failed to receive data from AXI DMA %d\r\n", Status);
+					tcp_abort(tpcb);
+				   	XScuTimer_Stop(&TimerInstance);
+				   	XScuGic_Disconnect(&Interrupt, XPAR_FABRIC_AXIDMA_0_MM2S_INTROUT_VEC_ID);
+				   	XScuGic_Disconnect(&Interrupt, XPAR_FABRIC_AXIDMA_0_S2MM_INTROUT_VEC_ID);
+				   	XGpio_InterruptDisable(&Gpio, XGPIO_IR_MASK);
+				   	XScuGic_Disable(&Interrupt, XPAR_FABRIC_GPIO_0_VEC_ID);
+				   	XScuGic_Disconnect(&Interrupt, XPAR_FABRIC_GPIO_0_VEC_ID);
+				   	cleanup_platform();
+				   	return ERR_ABRT;
+				}
+				tcp_recv(tpcb, recv_callback);
+			}
+		}
+	}
+
+	/* free the received pbuf */
+	pbuf_free(p);
+	return ERR_OK;
+}
+
+void error_callback(void *arg, err_t err)
+{
+	xil_printf("TCP Error: %d\r\n", err);
+	pcb = NULL;
+}
+
+err_t accept_callback(void *arg, struct tcp_pcb *newpcb, err_t err)
+{
+	static int connection = 1;
+	xil_printf("Connection accepted\r\n");
+
+	pcb = newpcb;
+	/* set the receive callback for this connection */
+	tcp_recv(newpcb, recv_callback_init);
+
+	/* just use an integer number indicating the connection id as the
+	   callback argument */
+	tcp_arg(newpcb, (void*)(UINTPTR)connection);
+
+	tcp_err(newpcb, error_callback);
+	/* increment for subsequent accepted connections */
+	connection++;
+
+	return ERR_OK;
+}
+
+
+int start_application()
+{
+	// struct tcp_pcb *pcb;
+	err_t err;
+	unsigned port = 7;
+
+	/* create new TCP PCB structure */
+	pcb = tcp_new_ip_type(IPADDR_TYPE_ANY);
+	if (!pcb) {
+		xil_printf("Error creating PCB. Out of Memory\n\r");
+    	XScuGic_Disconnect(&Interrupt, XPAR_FABRIC_AXIDMA_0_MM2S_INTROUT_VEC_ID);
+    	XScuGic_Disconnect(&Interrupt, XPAR_FABRIC_AXIDMA_0_S2MM_INTROUT_VEC_ID);
+    	XGpio_InterruptDisable(&Gpio, XGPIO_IR_MASK);
+    	XScuGic_Disable(&Interrupt, XPAR_FABRIC_GPIO_0_VEC_ID);
+    	XScuGic_Disconnect(&Interrupt, XPAR_FABRIC_GPIO_0_VEC_ID);
+    	cleanup_platform();
+		return -1;
+	}
+
+	/* bind to specified @port */
+	err = tcp_bind(pcb, IP_ANY_TYPE, port);
+	if (err != ERR_OK) {
+		xil_printf("Unable to bind to port %d: err = %d\n\r", port, err);
+    	XScuGic_Disconnect(&Interrupt, XPAR_FABRIC_AXIDMA_0_MM2S_INTROUT_VEC_ID);
+    	XScuGic_Disconnect(&Interrupt, XPAR_FABRIC_AXIDMA_0_S2MM_INTROUT_VEC_ID);
+    	XGpio_InterruptDisable(&Gpio, XGPIO_IR_MASK);
+    	XScuGic_Disable(&Interrupt, XPAR_FABRIC_GPIO_0_VEC_ID);
+    	XScuGic_Disconnect(&Interrupt, XPAR_FABRIC_GPIO_0_VEC_ID);
+    	cleanup_platform();
+		return -2;
+	}
+
+	/* we do not need any arguments to callback functions */
+	tcp_arg(pcb, NULL);
+
+	/* listen for connections */
+	pcb = tcp_listen(pcb);
+	if (!pcb) {
+		xil_printf("Out of memory while tcp_listen\n\r");
+    	XScuGic_Disconnect(&Interrupt, XPAR_FABRIC_AXIDMA_0_MM2S_INTROUT_VEC_ID);
+    	XScuGic_Disconnect(&Interrupt, XPAR_FABRIC_AXIDMA_0_S2MM_INTROUT_VEC_ID);
+    	XGpio_InterruptDisable(&Gpio, XGPIO_IR_MASK);
+    	XScuGic_Disable(&Interrupt, XPAR_FABRIC_GPIO_0_VEC_ID);
+    	XScuGic_Disconnect(&Interrupt, XPAR_FABRIC_GPIO_0_VEC_ID);
+    	cleanup_platform();
+		return -3;
+	}
+
+	/* specify callback to use for incoming connections */
+	tcp_accept(pcb, accept_callback);
+
+	xil_printf("TCP server started @ port %d\n\r", port);
+
+	return 0;
+}

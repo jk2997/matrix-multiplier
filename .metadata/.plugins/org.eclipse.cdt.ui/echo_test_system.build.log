@@ -1,0 +1,16 @@
+20:32:13 **** Incremental Build of configuration Debug for project echo_test_system ****
+make all 
+Generating bif file for the system project
+generate_system_bif.bat 49736 C:/Xilinx/p/fm3/pla/export/pla/pla.xpfm standalone_domain C:/Xilinx/p/fm3/echo_test_system/Debug/system.bif
+'\gnu\microblaze\lin\bin\' is not recognized as an internal or external command,
+operable program or batch file.
+'\gnu\microblaze\nt\bin\' is not recognized as an internal or external command,
+operable program or batch file.
+'\gnuwin\bin\' is not recognized as an internal or external command,
+operable program or batch file.
+sdcard_gen --xpfm C:/Xilinx/p/fm3/pla/export/pla/pla.xpfm --sys_config pla --bif C:/Xilinx/p/fm3/echo_test_system/Debug/system.bif --bitstream C:/Xilinx/p/fm3/echo_test/_ide/bitstream/matmult_6_xsa.bit --elf C:/Xilinx/p/fm3/echo_test/Debug/echo_test.elf,ps7_cortexa9_0
+creating BOOT.BIN using C:/Xilinx/p/fm3/echo_test/_ide/bitstream/matmult_6_xsa.bit
+Running C:/Xilinx/Vitis/2024.1/bin/bootgen  -image C:/Xilinx/p/fm3/echo_test_system/Debug/sd_card_temp/boot.bif -w -o i BOOT.BIN
+
+20:32:27 Build Finished (took 13s.602ms)
+

@@ -1,0 +1,264 @@
+timestamp=[2025-08-24 03:21:09], mode=WORKBENCH_START, duration=0:00:09.771, duration_ms=9771, data={}
+timestamp=[2025-08-24 03:21:10], mode=WORKBENCH_UI_INIT, duration=0:00:00.050, duration_ms=50, data={editors_count=0, platform_editors_count=0, projects_count=0, platform_projects_count=0, active_platform_editor=false, projects=}
+timestamp=[2025-08-24 03:21:14], mode=PLATFORM_REPOSITORY_INIT, duration=0:00:02.690, duration_ms=2690, data={}
+timestamp=[2025-08-24 03:23:37], mode=PLATFORM_CREATION, duration=0:00:30.480, duration_ms=30480, data={platform_source=dsa, os=standalone, processor=ps7_cortexa9, platform=null}
+timestamp=[2025-08-24 03:36:46], mode=PLATFORM_GENERATION, duration=0:02:59.586, duration_ms=179586, data={name=pla}
+timestamp=[2025-08-24 03:43:37], mode=APP_CREATION, duration=0:00:10.985, duration_ms=10985, data={name=matmult_ps, project_type=sdk, os=standalone, processor=cortex-a9, runtime=C/C++, platform=pla, application_type=application}
+timestamp=[2025-08-24 05:27:09], mode=APP_CREATION, duration=0:00:10.083, duration_ms=10083, data={name=xtmrctr_intr_example_1, project_type=sdk, os=standalone, processor=cortex-a9, runtime=C/C++, platform=pla, application_type=application}
+timestamp=[2025-08-24 06:56:18], mode=APP_CREATION, duration=0:00:10.399, duration_ms=10399, data={name=lwip_test, project_type=sdk, os=standalone, processor=cortex-a9, runtime=C/C++, platform=pla, application_type=application}
+timestamp=[2025-08-24 07:29:19], mode=APP_CREATION, duration=0:00:10.005, duration_ms=10005, data={name=xaxidma_example_simple_intr_1, project_type=sdk, os=standalone, processor=cortex-a9, runtime=C/C++, platform=pla, application_type=application}
+timestamp=[2025-08-24 07:57:58], mode=APP_CREATION, duration=0:00:09.812, duration_ms=9812, data={name=xscugic_example_1, project_type=sdk, os=standalone, processor=cortex-a9, runtime=C/C++, platform=pla, application_type=application}
+timestamp=[2025-08-24 08:08:09], mode=APP_CREATION, duration=0:00:09.381, duration_ms=9381, data={name=xgpio_intr_tapp_example_1, project_type=sdk, os=standalone, processor=cortex-a9, runtime=C/C++, platform=pla, application_type=application}
+timestamp=[2025-08-24 19:54:27], mode=PLATFORM_REPOSITORY_INIT, duration=0:00:01.602, duration_ms=1602, data={}
+timestamp=[2025-08-24 19:54:29], mode=WORKBENCH_START, duration=0:00:30.539, duration_ms=30539, data={}
+timestamp=[2025-08-24 19:54:29], mode=WORKBENCH_UI_INIT, duration=0:00:00.420, duration_ms=420, data={editors_count=22, platform_editors_count=2, projects_count=14, platform_projects_count=1, active_platform_editor=false, projects=RemoteSystemsTempFiles,lwip_test,lwip_test_system,matmult_ps,matmult_ps_system,pla,xaxidma_example_simple_intr_1,xaxidma_example_simple_intr_1_system,xgpio_intr_tapp_example_1,xgpio_intr_tapp_example_1_system,xscugic_example_1,xscugic_example_1_system,xtmrctr_intr_example_1,xtmrctr_intr_example_1_system}
+timestamp=[2025-08-25 08:38:28], mode=WORKBENCH_START, duration=0:00:13.733, duration_ms=13733, data={}
+timestamp=[2025-08-25 08:38:30], mode=WORKBENCH_UI_INIT, duration=0:00:01.325, duration_ms=1325, data={editors_count=22, platform_editors_count=2, projects_count=14, platform_projects_count=1, active_platform_editor=false, projects=RemoteSystemsTempFiles,lwip_test,lwip_test_system,matmult_ps,matmult_ps_system,pla,xaxidma_example_simple_intr_1,xaxidma_example_simple_intr_1_system,xgpio_intr_tapp_example_1,xgpio_intr_tapp_example_1_system,xscugic_example_1,xscugic_example_1_system,xtmrctr_intr_example_1,xtmrctr_intr_example_1_system}
+timestamp=[2025-08-25 08:38:31], mode=PLATFORM_REPOSITORY_INIT, duration=0:00:01.184, duration_ms=1184, data={}
+timestamp=[2025-08-25 20:21:06], mode=WORKBENCH_START, duration=0:00:28.103, duration_ms=28103, data={}
+timestamp=[2025-08-25 20:21:06], mode=PLATFORM_REPOSITORY_INIT, duration=0:00:01.445, duration_ms=1445, data={}
+timestamp=[2025-08-25 20:21:07], mode=WORKBENCH_UI_INIT, duration=0:00:00.638, duration_ms=638, data={editors_count=25, platform_editors_count=5, projects_count=14, platform_projects_count=1, active_platform_editor=false, projects=RemoteSystemsTempFiles,lwip_test,lwip_test_system,matmult_ps,matmult_ps_system,pla,xaxidma_example_simple_intr_1,xaxidma_example_simple_intr_1_system,xgpio_intr_tapp_example_1,xgpio_intr_tapp_example_1_system,xscugic_example_1,xscugic_example_1_system,xtmrctr_intr_example_1,xtmrctr_intr_example_1_system}
+timestamp=[2025-08-27 19:31:20], mode=PLATFORM_REPOSITORY_INIT, duration=0:00:02.462, duration_ms=2462, data={}
+timestamp=[2025-08-27 19:46:20], mode=WORKBENCH_START, duration=0:15:26.432, duration_ms=926432, data={}
+timestamp=[2025-08-27 19:46:20], mode=WORKBENCH_UI_INIT, duration=0:00:00.372, duration_ms=372, data={editors_count=25, platform_editors_count=5, projects_count=14, platform_projects_count=1, active_platform_editor=false, projects=RemoteSystemsTempFiles,lwip_test,lwip_test_system,matmult_ps,matmult_ps_system,pla,xaxidma_example_simple_intr_1,xaxidma_example_simple_intr_1_system,xgpio_intr_tapp_example_1,xgpio_intr_tapp_example_1_system,xscugic_example_1,xscugic_example_1_system,xtmrctr_intr_example_1,xtmrctr_intr_example_1_system}
+timestamp=[2025-08-28 00:27:58], mode=PLATFORM_GENERATION, duration=0:02:05.351, duration_ms=125351, data={name=pla}
+timestamp=[2025-08-28 09:10:42], mode=BUILD, duration=0:00:02.243, duration_ms=2243, data={name=matmult_ps, configuration=Debug, clean_build=false}
+timestamp=[2025-08-28 09:10:46], mode=BUILD, duration=0:00:01.445, duration_ms=1445, data={name=matmult_ps, configuration=Debug, clean_build=false}
+timestamp=[2025-08-28 09:21:27], mode=BUILD, duration=0:00:00.879, duration_ms=879, data={name=matmult_ps, configuration=Debug, clean_build=true}
+timestamp=[2025-08-28 09:21:31], mode=BUILD, duration=0:00:04.045, duration_ms=4045, data={name=matmult_ps, configuration=Debug, clean_build=false}
+timestamp=[2025-08-28 09:21:47], mode=BUILD, duration=0:00:14.117, duration_ms=14117, data={name=matmult_ps_system, configuration=Debug, clean_build=false}
+timestamp=[2025-08-28 19:18:34], mode=WORKBENCH_START, duration=0:00:12.892, duration_ms=12892, data={}
+timestamp=[2025-08-28 19:18:35], mode=WORKBENCH_UI_INIT, duration=0:00:01.171, duration_ms=1171, data={editors_count=25, platform_editors_count=5, projects_count=14, platform_projects_count=1, active_platform_editor=false, projects=RemoteSystemsTempFiles,lwip_test,lwip_test_system,matmult_ps,matmult_ps_system,pla,xaxidma_example_simple_intr_1,xaxidma_example_simple_intr_1_system,xgpio_intr_tapp_example_1,xgpio_intr_tapp_example_1_system,xscugic_example_1,xscugic_example_1_system,xtmrctr_intr_example_1,xtmrctr_intr_example_1_system}
+timestamp=[2025-08-28 19:18:36], mode=PLATFORM_REPOSITORY_INIT, duration=0:00:01.153, duration_ms=1153, data={}
+timestamp=[2025-08-28 20:29:54], mode=BUILD, duration=0:00:05.541, duration_ms=5541, data={name=matmult_ps, configuration=Debug, clean_build=false}
+timestamp=[2025-08-28 20:36:41], mode=BUILD, duration=0:00:01.783, duration_ms=1783, data={name=matmult_ps, configuration=Debug, clean_build=false}
+timestamp=[2025-08-28 20:38:13], mode=BUILD, duration=0:00:01.837, duration_ms=1837, data={name=matmult_ps, configuration=Debug, clean_build=false}
+timestamp=[2025-08-28 20:40:09], mode=PLATFORM_GENERATION, duration=0:00:05.441, duration_ms=5441, data={name=pla}
+timestamp=[2025-08-28 20:40:11], mode=BUILD, duration=0:00:01.722, duration_ms=1722, data={name=matmult_ps, configuration=Debug, clean_build=false}
+timestamp=[2025-08-28 22:10:40], mode=BUILD, duration=0:00:05.150, duration_ms=5150, data={name=matmult_ps, configuration=Debug, clean_build=false}
+timestamp=[2025-08-28 22:10:48], mode=BUILD, duration=0:00:07.291, duration_ms=7291, data={name=matmult_ps_system, configuration=Debug, clean_build=false}
+timestamp=[2025-08-28 22:23:26], mode=BUILD, duration=0:00:01.807, duration_ms=1807, data={name=matmult_ps, configuration=Debug, clean_build=false}
+timestamp=[2025-08-28 22:27:27], mode=PLATFORM_GENERATION, duration=0:01:02.595, duration_ms=62595, data={name=pla}
+timestamp=[2025-08-28 22:28:01], mode=BUILD, duration=0:00:03.383, duration_ms=3383, data={name=matmult_ps, configuration=Debug, clean_build=false}
+timestamp=[2025-08-28 22:48:29], mode=BUILD, duration=0:00:01.146, duration_ms=1146, data={name=matmult_ps, configuration=Debug, clean_build=false}
+timestamp=[2025-08-28 22:54:14], mode=BUILD, duration=0:00:01.362, duration_ms=1362, data={name=matmult_ps, configuration=Debug, clean_build=false}
+timestamp=[2025-08-28 22:54:21], mode=BUILD, duration=0:00:06.382, duration_ms=6382, data={name=matmult_ps_system, configuration=Debug, clean_build=false}
+timestamp=[2025-08-28 22:56:08], mode=BUILD, duration=0:00:01.386, duration_ms=1386, data={name=matmult_ps, configuration=Debug, clean_build=false}
+timestamp=[2025-08-28 22:56:15], mode=BUILD, duration=0:00:06.552, duration_ms=6552, data={name=matmult_ps_system, configuration=Debug, clean_build=false}
+timestamp=[2025-08-29 01:05:01], mode=BUILD, duration=0:00:02.170, duration_ms=2170, data={name=matmult_ps, configuration=Debug, clean_build=false}
+timestamp=[2025-08-29 01:05:15], mode=BUILD, duration=0:00:11.940, duration_ms=11940, data={name=matmult_ps_system, configuration=Debug, clean_build=false}
+timestamp=[2025-08-29 05:26:28], mode=BUILD, duration=0:00:02.380, duration_ms=2380, data={name=matmult_ps, configuration=Debug, clean_build=false}
+timestamp=[2025-08-29 05:26:42], mode=BUILD, duration=0:00:12.402, duration_ms=12402, data={name=matmult_ps_system, configuration=Debug, clean_build=false}
+timestamp=[2025-08-29 06:20:46], mode=APP_CREATION, duration=0:00:10.735, duration_ms=10735, data={name=lwip_matmult, project_type=sdk, os=standalone, processor=cortex-a9, runtime=C/C++, platform=pla, application_type=application}
+timestamp=[2025-08-29 06:22:20], mode=BUILD, duration=0:00:10.004, duration_ms=10004, data={name=lwip_test, configuration=Debug, clean_build=false}
+timestamp=[2025-08-29 06:24:04], mode=PLATFORM_GENERATION, duration=0:00:51.728, duration_ms=51728, data={name=pla}
+timestamp=[2025-08-29 06:24:27], mode=BUILD, duration=0:00:00.377, duration_ms=377, data={name=lwip_test, configuration=Debug, clean_build=true}
+timestamp=[2025-08-29 06:24:37], mode=BUILD, duration=0:00:09.500, duration_ms=9500, data={name=lwip_test, configuration=Debug, clean_build=false}
+timestamp=[2025-08-29 06:24:49], mode=BUILD, duration=0:00:11.168, duration_ms=11168, data={name=lwip_test_system, configuration=Debug, clean_build=false}
+timestamp=[2025-08-29 06:25:02], mode=BUILD, duration=0:00:09.303, duration_ms=9303, data={name=lwip_matmult, configuration=Debug, clean_build=false}
+timestamp=[2025-08-29 06:25:15], mode=BUILD, duration=0:00:11.542, duration_ms=11542, data={name=lwip_matmult_system, configuration=Debug, clean_build=false}
+timestamp=[2025-08-29 17:22:43], mode=BUILD, duration=0:00:03.929, duration_ms=3929, data={name=lwip_matmult, configuration=Debug, clean_build=false}
+timestamp=[2025-08-29 17:32:03], mode=BUILD, duration=0:00:00.354, duration_ms=354, data={name=lwip_matmult, configuration=Debug, clean_build=true}
+timestamp=[2025-08-29 17:32:10], mode=BUILD, duration=0:00:07.337, duration_ms=7337, data={name=lwip_matmult, configuration=Debug, clean_build=false}
+timestamp=[2025-08-29 17:34:08], mode=BUILD, duration=0:00:01.470, duration_ms=1470, data={name=lwip_matmult, configuration=Debug, clean_build=false}
+timestamp=[2025-08-29 17:35:09], mode=BUILD, duration=0:00:01.399, duration_ms=1399, data={name=lwip_matmult, configuration=Debug, clean_build=false}
+timestamp=[2025-08-29 17:38:13], mode=BUILD, duration=0:00:08.394, duration_ms=8394, data={name=lwip_matmult, configuration=Debug, clean_build=false}
+timestamp=[2025-08-29 17:42:14], mode=BUILD, duration=0:00:09.694, duration_ms=9694, data={name=lwip_matmult, configuration=Debug, clean_build=false}
+timestamp=[2025-08-29 17:44:13], mode=BUILD, duration=0:00:04.116, duration_ms=4116, data={name=lwip_matmult, configuration=Debug, clean_build=false}
+timestamp=[2025-08-29 17:44:27], mode=BUILD, duration=0:00:12.372, duration_ms=12372, data={name=lwip_matmult_system, configuration=Debug, clean_build=false}
+timestamp=[2025-08-29 18:53:35], mode=WORKBENCH_START, duration=0:00:09.140, duration_ms=9140, data={}
+timestamp=[2025-08-29 18:53:35], mode=WORKBENCH_UI_INIT, duration=0:00:00.269, duration_ms=269, data={editors_count=37, platform_editors_count=10, projects_count=16, platform_projects_count=1, active_platform_editor=false, projects=RemoteSystemsTempFiles,lwip_matmult,lwip_matmult_system,lwip_test,lwip_test_system,matmult_ps,matmult_ps_system,pla,xaxidma_example_simple_intr_1,xaxidma_example_simple_intr_1_system,xgpio_intr_tapp_example_1,xgpio_intr_tapp_example_1_system,xscugic_example_1,xscugic_example_1_system,xtmrctr_intr_example_1,xtmrctr_intr_example_1_system}
+timestamp=[2025-08-29 18:53:35], mode=PLATFORM_REPOSITORY_INIT, duration=0:00:00.723, duration_ms=723, data={}
+timestamp=[2025-08-29 18:56:18], mode=BUILD, duration=0:00:02.146, duration_ms=2146, data={name=lwip_matmult, configuration=Debug, clean_build=false}
+timestamp=[2025-08-29 18:56:26], mode=BUILD, duration=0:00:07.672, duration_ms=7672, data={name=lwip_matmult_system, configuration=Debug, clean_build=false}
+timestamp=[2025-08-29 18:58:43], mode=MISC, duration=0:00:05.255, duration_ms=5255, data={name=lwip_matmult_system, type=bif_creation}
+timestamp=[2025-08-29 19:53:17], mode=PLATFORM_GENERATION, duration=0:00:03.572, duration_ms=3572, data={name=pla}
+timestamp=[2025-08-29 19:53:19], mode=BUILD, duration=0:00:01.393, duration_ms=1393, data={name=lwip_matmult, configuration=Debug, clean_build=false}
+timestamp=[2025-08-29 19:53:26], mode=BUILD, duration=0:00:06.773, duration_ms=6773, data={name=lwip_matmult_system, configuration=Debug, clean_build=false}
+timestamp=[2025-08-30 01:05:33], mode=BUILD, duration=0:00:01.534, duration_ms=1534, data={name=lwip_matmult, configuration=Debug, clean_build=false}
+timestamp=[2025-08-30 01:05:41], mode=BUILD, duration=0:00:07.317, duration_ms=7317, data={name=lwip_matmult_system, configuration=Debug, clean_build=false}
+timestamp=[2025-08-30 01:16:44], mode=BUILD, duration=0:00:00.853, duration_ms=853, data={name=lwip_matmult, configuration=Debug, clean_build=false}
+timestamp=[2025-08-30 01:17:06], mode=BUILD, duration=0:00:02.805, duration_ms=2805, data={name=lwip_matmult, configuration=Debug, clean_build=false}
+timestamp=[2025-08-30 01:22:31], mode=BUILD, duration=0:00:01.478, duration_ms=1478, data={name=lwip_matmult, configuration=Debug, clean_build=false}
+timestamp=[2025-08-30 01:25:22], mode=BUILD, duration=0:00:01.519, duration_ms=1519, data={name=lwip_matmult, configuration=Debug, clean_build=false}
+timestamp=[2025-08-30 03:17:51], mode=APP_CREATION, duration=0:00:11.114, duration_ms=11114, data={name=xscutimer_intr_example_1, project_type=sdk, os=standalone, processor=cortex-a9, runtime=C/C++, platform=pla, application_type=application}
+timestamp=[2025-08-30 05:43:50], mode=BUILD, duration=0:00:02.017, duration_ms=2017, data={name=matmult_ps, configuration=Debug, clean_build=false}
+timestamp=[2025-08-30 05:58:45], mode=PLATFORM_GENERATION, duration=0:01:30.493, duration_ms=90493, data={name=pla}
+timestamp=[2025-08-30 06:04:49], mode=BUILD, duration=0:00:03.438, duration_ms=3438, data={name=matmult_ps, configuration=Debug, clean_build=false}
+timestamp=[2025-08-30 06:13:26], mode=BUILD, duration=0:00:01.218, duration_ms=1218, data={name=matmult_ps, configuration=Debug, clean_build=false}
+timestamp=[2025-08-30 06:14:38], mode=BUILD, duration=0:00:02.210, duration_ms=2210, data={name=matmult_ps, configuration=Debug, clean_build=false}
+timestamp=[2025-08-30 06:16:49], mode=PLATFORM_GENERATION, duration=0:00:10.835, duration_ms=10835, data={name=pla}
+timestamp=[2025-08-30 06:16:50], mode=BUILD, duration=0:00:01.269, duration_ms=1269, data={name=matmult_ps, configuration=Debug, clean_build=false}
+timestamp=[2025-08-30 06:17:51], mode=PLATFORM_GENERATION, duration=0:00:20.427, duration_ms=20427, data={name=pla}
+timestamp=[2025-08-30 06:17:52], mode=BUILD, duration=0:00:01.347, duration_ms=1347, data={name=matmult_ps, configuration=Debug, clean_build=false}
+timestamp=[2025-08-30 06:19:04], mode=PLATFORM_GENERATION, duration=0:00:19.754, duration_ms=19754, data={name=pla}
+timestamp=[2025-08-30 06:19:30], mode=PLATFORM_GENERATION, duration=0:00:19.504, duration_ms=19504, data={name=pla}
+timestamp=[2025-08-30 06:19:31], mode=BUILD, duration=0:00:01.290, duration_ms=1290, data={name=matmult_ps, configuration=Debug, clean_build=false}
+timestamp=[2025-08-30 06:20:46], mode=PLATFORM_GENERATION, duration=0:00:19.512, duration_ms=19512, data={name=pla}
+timestamp=[2025-08-30 06:20:48], mode=BUILD, duration=0:00:01.292, duration_ms=1292, data={name=matmult_ps, configuration=Debug, clean_build=false}
+timestamp=[2025-08-30 06:21:38], mode=PLATFORM_GENERATION, duration=0:00:19.532, duration_ms=19532, data={name=pla}
+timestamp=[2025-08-30 06:24:05], mode=WORKBENCH_START, duration=0:00:09.681, duration_ms=9681, data={}
+timestamp=[2025-08-30 06:24:06], mode=WORKBENCH_UI_INIT, duration=0:00:00.254, duration_ms=254, data={editors_count=27, platform_editors_count=7, projects_count=18, platform_projects_count=1, active_platform_editor=true, projects=RemoteSystemsTempFiles,lwip_matmult,lwip_matmult_system,lwip_test,lwip_test_system,matmult_ps,matmult_ps_system,pla,xaxidma_example_simple_intr_1,xaxidma_example_simple_intr_1_system,xgpio_intr_tapp_example_1,xgpio_intr_tapp_example_1_system,xscugic_example_1,xscugic_example_1_system,xscutimer_intr_example_1,xscutimer_intr_example_1_system,xtmrctr_intr_example_1,xtmrctr_intr_example_1_system}
+timestamp=[2025-08-30 06:24:07], mode=PLATFORM_REPOSITORY_INIT, duration=0:00:00.807, duration_ms=807, data={}
+timestamp=[2025-08-30 06:24:49], mode=PLATFORM_GENERATION, duration=0:00:24.144, duration_ms=24144, data={name=pla}
+timestamp=[2025-08-30 06:25:22], mode=PLATFORM_GENERATION, duration=0:00:22.804, duration_ms=22804, data={name=pla}
+timestamp=[2025-08-30 06:25:51], mode=PLATFORM_GENERATION, duration=0:00:23.353, duration_ms=23353, data={name=pla}
+timestamp=[2025-08-30 09:43:39], mode=PLATFORM_GENERATION, duration=0:00:33.281, duration_ms=33281, data={name=pla}
+timestamp=[2025-08-30 09:43:56], mode=BUILD, duration=0:00:02.782, duration_ms=2782, data={name=matmult_ps, configuration=Debug, clean_build=false}
+timestamp=[2025-08-30 09:47:42], mode=PLATFORM_GENERATION, duration=0:00:18.633, duration_ms=18633, data={name=pla}
+timestamp=[2025-08-30 09:47:45], mode=BUILD, duration=0:00:03.036, duration_ms=3036, data={name=matmult_ps, configuration=Debug, clean_build=false}
+timestamp=[2025-08-30 09:48:00], mode=BUILD, duration=0:00:13.640, duration_ms=13640, data={name=matmult_ps_system, configuration=Debug, clean_build=false}
+timestamp=[2025-08-30 21:56:06], mode=WORKBENCH_START, duration=0:00:14.438, duration_ms=14438, data={}
+timestamp=[2025-08-30 21:56:08], mode=WORKBENCH_UI_INIT, duration=0:00:01.073, duration_ms=1073, data={editors_count=29, platform_editors_count=9, projects_count=18, platform_projects_count=1, active_platform_editor=true, projects=RemoteSystemsTempFiles,lwip_matmult,lwip_matmult_system,lwip_test,lwip_test_system,matmult_ps,matmult_ps_system,pla,xaxidma_example_simple_intr_1,xaxidma_example_simple_intr_1_system,xgpio_intr_tapp_example_1,xgpio_intr_tapp_example_1_system,xscugic_example_1,xscugic_example_1_system,xscutimer_intr_example_1,xscutimer_intr_example_1_system,xtmrctr_intr_example_1,xtmrctr_intr_example_1_system}
+timestamp=[2025-08-30 21:56:09], mode=PLATFORM_REPOSITORY_INIT, duration=0:00:01.262, duration_ms=1262, data={}
+timestamp=[2025-08-31 02:44:54], mode=PLATFORM_GENERATION, duration=0:00:07.206, duration_ms=7206, data={name=pla}
+timestamp=[2025-08-31 02:44:58], mode=BUILD, duration=0:00:03.382, duration_ms=3382, data={name=matmult_ps, configuration=Debug, clean_build=false}
+timestamp=[2025-08-31 02:45:13], mode=BUILD, duration=0:00:13.618, duration_ms=13618, data={name=matmult_ps_system, configuration=Debug, clean_build=false}
+timestamp=[2025-08-31 04:48:31], mode=WORKBENCH_START, duration=0:00:08.874, duration_ms=8874, data={}
+timestamp=[2025-08-31 04:48:32], mode=WORKBENCH_UI_INIT, duration=0:00:00.746, duration_ms=746, data={editors_count=29, platform_editors_count=9, projects_count=18, platform_projects_count=1, active_platform_editor=true, projects=RemoteSystemsTempFiles,lwip_matmult,lwip_matmult_system,lwip_test,lwip_test_system,matmult_ps,matmult_ps_system,pla,xaxidma_example_simple_intr_1,xaxidma_example_simple_intr_1_system,xgpio_intr_tapp_example_1,xgpio_intr_tapp_example_1_system,xscugic_example_1,xscugic_example_1_system,xscutimer_intr_example_1,xscutimer_intr_example_1_system,xtmrctr_intr_example_1,xtmrctr_intr_example_1_system}
+timestamp=[2025-08-31 04:48:33], mode=PLATFORM_REPOSITORY_INIT, duration=0:00:00.934, duration_ms=934, data={}
+timestamp=[2025-08-31 05:16:15], mode=WORKBENCH_START, duration=0:00:15.652, duration_ms=15652, data={}
+timestamp=[2025-08-31 05:16:17], mode=WORKBENCH_UI_INIT, duration=0:00:01.593, duration_ms=1593, data={editors_count=29, platform_editors_count=9, projects_count=18, platform_projects_count=1, active_platform_editor=false, projects=RemoteSystemsTempFiles,lwip_matmult,lwip_matmult_system,lwip_test,lwip_test_system,matmult_ps,matmult_ps_system,pla,xaxidma_example_simple_intr_1,xaxidma_example_simple_intr_1_system,xgpio_intr_tapp_example_1,xgpio_intr_tapp_example_1_system,xscugic_example_1,xscugic_example_1_system,xscutimer_intr_example_1,xscutimer_intr_example_1_system,xtmrctr_intr_example_1,xtmrctr_intr_example_1_system}
+timestamp=[2025-08-31 05:16:17], mode=PLATFORM_REPOSITORY_INIT, duration=0:00:01.220, duration_ms=1220, data={}
+timestamp=[2025-08-31 05:32:40], mode=PLATFORM_GENERATION, duration=0:00:08.262, duration_ms=8262, data={name=pla}
+timestamp=[2025-08-31 05:32:49], mode=BUILD, duration=0:00:09.473, duration_ms=9473, data={name=matmult_ps, configuration=Debug, clean_build=false}
+timestamp=[2025-08-31 05:33:04], mode=BUILD, duration=0:00:12.882, duration_ms=12882, data={name=matmult_ps_system, configuration=Debug, clean_build=false}
+timestamp=[2025-08-31 06:56:07], mode=BUILD, duration=0:00:02.473, duration_ms=2473, data={name=matmult_ps, configuration=Debug, clean_build=false}
+timestamp=[2025-08-31 08:26:51], mode=BUILD, duration=1:30:42.796, duration_ms=5442796, data={name=matmult_ps_system, configuration=Debug, clean_build=false}
+timestamp=[2025-08-31 09:16:53], mode=BUILD, duration=0:00:02.494, duration_ms=2494, data={name=matmult_ps, configuration=Debug, clean_build=false}
+timestamp=[2025-08-31 09:17:08], mode=BUILD, duration=0:00:13.589, duration_ms=13589, data={name=matmult_ps_system, configuration=Debug, clean_build=false}
+timestamp=[2025-08-31 20:41:51], mode=WORKBENCH_START, duration=0:00:09.791, duration_ms=9791, data={}
+timestamp=[2025-08-31 20:41:53], mode=WORKBENCH_UI_INIT, duration=0:00:01.363, duration_ms=1363, data={editors_count=30, platform_editors_count=9, projects_count=18, platform_projects_count=1, active_platform_editor=false, projects=RemoteSystemsTempFiles,lwip_matmult,lwip_matmult_system,lwip_test,lwip_test_system,matmult_ps,matmult_ps_system,pla,xaxidma_example_simple_intr_1,xaxidma_example_simple_intr_1_system,xgpio_intr_tapp_example_1,xgpio_intr_tapp_example_1_system,xscugic_example_1,xscugic_example_1_system,xscutimer_intr_example_1,xscutimer_intr_example_1_system,xtmrctr_intr_example_1,xtmrctr_intr_example_1_system}
+timestamp=[2025-08-31 20:41:53], mode=PLATFORM_REPOSITORY_INIT, duration=0:00:01.244, duration_ms=1244, data={}
+timestamp=[2025-08-31 21:05:54], mode=PLATFORM_GENERATION, duration=0:00:06.386, duration_ms=6386, data={name=pla}
+timestamp=[2025-08-31 21:05:55], mode=BUILD, duration=0:00:00.885, duration_ms=885, data={name=matmult_ps, configuration=Debug, clean_build=true}
+timestamp=[2025-08-31 21:06:32], mode=BUILD, duration=0:00:23.656, duration_ms=23656, data={name=matmult_ps, configuration=Debug, clean_build=false}
+timestamp=[2025-08-31 21:06:46], mode=BUILD, duration=0:00:12.500, duration_ms=12500, data={name=matmult_ps_system, configuration=Debug, clean_build=false}
+timestamp=[2025-08-31 21:07:24], mode=BUILD, duration=0:00:23.354, duration_ms=23354, data={name=matmult_ps, configuration=Release, clean_build=false}
+timestamp=[2025-08-31 21:07:39], mode=BUILD, duration=0:00:12.919, duration_ms=12919, data={name=matmult_ps_system, configuration=Release, clean_build=false}
+timestamp=[2025-08-31 23:18:31], mode=APP_CREATION, duration=0:00:10.611, duration_ms=10611, data={name=echo_test, project_type=sdk, os=standalone, processor=cortex-a9, runtime=C/C++, platform=pla, application_type=application}
+timestamp=[2025-08-31 23:20:04], mode=PLATFORM_GENERATION, duration=0:01:25.211, duration_ms=85211, data={name=pla}
+timestamp=[2025-08-31 23:24:51], mode=BUILD, duration=0:00:30.592, duration_ms=30592, data={name=echo_test, configuration=Debug, clean_build=false}
+timestamp=[2025-08-31 23:49:34], mode=PLATFORM_GENERATION, duration=0:02:10.590, duration_ms=130590, data={name=pla}
+timestamp=[2025-08-31 23:50:38], mode=BUILD, duration=0:01:04.254, duration_ms=64254, data={name=echo_test, configuration=Debug, clean_build=false}
+timestamp=[2025-08-31 23:50:59], mode=BUILD, duration=0:00:19.087, duration_ms=19087, data={name=echo_test_system, configuration=Debug, clean_build=false}
+timestamp=[2025-09-01 00:25:04], mode=BUILD, duration=0:00:42.910, duration_ms=42910, data={name=echo_test, configuration=Debug, clean_build=false}
+timestamp=[2025-09-01 00:25:19], mode=BUILD, duration=0:00:13.754, duration_ms=13754, data={name=echo_test_system, configuration=Debug, clean_build=false}
+timestamp=[2025-09-01 06:47:10], mode=BUILD, duration=0:00:12.422, duration_ms=12422, data={name=echo_test, configuration=Debug, clean_build=false}
+timestamp=[2025-09-01 07:12:43], mode=BUILD, duration=0:00:41.592, duration_ms=41592, data={name=echo_test, configuration=Debug, clean_build=false}
+timestamp=[2025-09-01 07:12:50], mode=BUILD, duration=0:00:06.577, duration_ms=6577, data={name=echo_test_system, configuration=Debug, clean_build=false}
+timestamp=[2025-09-02 02:46:58], mode=WORKBENCH_START, duration=0:00:20.985, duration_ms=20985, data={}
+timestamp=[2025-09-02 02:46:58], mode=PLATFORM_REPOSITORY_INIT, duration=0:00:01.283, duration_ms=1283, data={}
+timestamp=[2025-09-02 02:46:59], mode=WORKBENCH_UI_INIT, duration=0:00:00.459, duration_ms=459, data={editors_count=34, platform_editors_count=9, projects_count=20, platform_projects_count=1, active_platform_editor=false, projects=RemoteSystemsTempFiles,echo_test,echo_test_system,lwip_matmult,lwip_matmult_system,lwip_test,lwip_test_system,matmult_ps,matmult_ps_system,pla,xaxidma_example_simple_intr_1,xaxidma_example_simple_intr_1_system,xgpio_intr_tapp_example_1,xgpio_intr_tapp_example_1_system,xscugic_example_1,xscugic_example_1_system,xscutimer_intr_example_1,xscutimer_intr_example_1_system,xtmrctr_intr_example_1,xtmrctr_intr_example_1_system}
+timestamp=[2025-09-02 02:52:15], mode=APP_CREATION, duration=0:00:22.356, duration_ms=22356, data={name=xscutimer_intr_example_2, project_type=sdk, os=standalone, processor=cortex-a9, runtime=C/C++, platform=pla, application_type=application}
+timestamp=[2025-09-02 03:12:20], mode=PLATFORM_GENERATION, duration=0:00:06.565, duration_ms=6565, data={name=pla}
+timestamp=[2025-09-02 03:13:15], mode=BUILD, duration=0:00:54.685, duration_ms=54685, data={name=echo_test, configuration=Debug, clean_build=false}
+timestamp=[2025-09-02 04:33:34], mode=BUILD, duration=0:00:01.565, duration_ms=1565, data={name=echo_test, configuration=Debug, clean_build=false}
+timestamp=[2025-09-02 04:35:54], mode=BUILD, duration=0:00:01.516, duration_ms=1516, data={name=echo_test, configuration=Debug, clean_build=false}
+timestamp=[2025-09-02 04:36:56], mode=BUILD, duration=0:00:44.249, duration_ms=44249, data={name=echo_test, configuration=Debug, clean_build=false}
+timestamp=[2025-09-02 07:05:52], mode=BUILD, duration=0:00:01.004, duration_ms=1004, data={name=echo_test, configuration=Debug, clean_build=false}
+timestamp=[2025-09-02 07:09:05], mode=BUILD, duration=0:00:00.911, duration_ms=911, data={name=echo_test, configuration=Debug, clean_build=false}
+timestamp=[2025-09-02 07:11:14], mode=BUILD, duration=0:00:02.468, duration_ms=2468, data={name=echo_test, configuration=Debug, clean_build=false}
+timestamp=[2025-09-02 07:12:55], mode=BUILD, duration=0:00:02.805, duration_ms=2805, data={name=echo_test, configuration=Debug, clean_build=false}
+timestamp=[2025-09-02 07:14:52], mode=BUILD, duration=0:00:01.999, duration_ms=1999, data={name=echo_test, configuration=Debug, clean_build=false}
+timestamp=[2025-09-02 07:35:37], mode=BUILD, duration=0:00:04.097, duration_ms=4097, data={name=echo_test, configuration=Debug, clean_build=false}
+timestamp=[2025-09-02 07:43:45], mode=BUILD, duration=0:00:01.605, duration_ms=1605, data={name=echo_test, configuration=Debug, clean_build=false}
+timestamp=[2025-09-02 19:07:29], mode=WORKBENCH_START, duration=0:00:08.709, duration_ms=8709, data={}
+timestamp=[2025-09-02 19:07:29], mode=WORKBENCH_UI_INIT, duration=0:00:00.184, duration_ms=184, data={editors_count=32, platform_editors_count=8, projects_count=22, platform_projects_count=1, active_platform_editor=false, projects=RemoteSystemsTempFiles,echo_test,echo_test_system,lwip_matmult,lwip_matmult_system,lwip_test,lwip_test_system,matmult_ps,matmult_ps_system,pla,xaxidma_example_simple_intr_1,xaxidma_example_simple_intr_1_system,xgpio_intr_tapp_example_1,xgpio_intr_tapp_example_1_system,xscugic_example_1,xscugic_example_1_system,xscutimer_intr_example_1,xscutimer_intr_example_1_system,xscutimer_intr_example_2,xscutimer_intr_example_2_system,xtmrctr_intr_example_1,xtmrctr_intr_example_1_system}
+timestamp=[2025-09-02 19:07:30], mode=PLATFORM_REPOSITORY_INIT, duration=0:00:00.778, duration_ms=778, data={}
+timestamp=[2025-09-02 19:25:00], mode=PLATFORM_GENERATION, duration=0:01:19.472, duration_ms=79472, data={name=pla}
+timestamp=[2025-09-02 19:25:41], mode=BUILD, duration=0:00:15.122, duration_ms=15122, data={name=echo_test, configuration=Debug, clean_build=false}
+timestamp=[2025-09-02 19:26:01], mode=BUILD, duration=0:00:17.999, duration_ms=17999, data={name=echo_test_system, configuration=Debug, clean_build=false}
+timestamp=[2025-09-02 19:26:02], mode=BUILD, duration=0:00:00.995, duration_ms=995, data={name=echo_test, configuration=Debug, clean_build=false}
+timestamp=[2025-09-02 19:26:42], mode=BUILD, duration=0:00:38.535, duration_ms=38535, data={name=echo_test_system, configuration=Debug, clean_build=false}
+timestamp=[2025-09-02 21:02:59], mode=BUILD, duration=0:00:01.684, duration_ms=1684, data={name=echo_test, configuration=Debug, clean_build=false}
+timestamp=[2025-09-02 21:05:51], mode=BUILD, duration=0:00:02.680, duration_ms=2680, data={name=echo_test, configuration=Debug, clean_build=false}
+timestamp=[2025-09-03 02:09:01], mode=BUILD, duration=0:00:02.711, duration_ms=2711, data={name=echo_test, configuration=Debug, clean_build=false}
+timestamp=[2025-09-03 02:09:16], mode=BUILD, duration=0:00:13.797, duration_ms=13797, data={name=echo_test_system, configuration=Debug, clean_build=false}
+timestamp=[2025-09-03 02:09:47], mode=BUILD, duration=0:00:00.855, duration_ms=855, data={name=echo_test, configuration=Debug, clean_build=false}
+timestamp=[2025-09-03 02:10:02], mode=BUILD, duration=0:00:13.546, duration_ms=13546, data={name=echo_test_system, configuration=Debug, clean_build=false}
+timestamp=[2025-09-03 02:13:11], mode=BUILD, duration=0:00:02.514, duration_ms=2514, data={name=echo_test, configuration=Debug, clean_build=false}
+timestamp=[2025-09-03 02:25:44], mode=BUILD, duration=0:00:03.424, duration_ms=3424, data={name=echo_test, configuration=Debug, clean_build=false}
+timestamp=[2025-09-03 02:33:39], mode=BUILD, duration=0:00:02.543, duration_ms=2543, data={name=echo_test, configuration=Debug, clean_build=false}
+timestamp=[2025-09-03 02:39:43], mode=BUILD, duration=0:00:02.532, duration_ms=2532, data={name=echo_test, configuration=Debug, clean_build=false}
+timestamp=[2025-09-03 02:46:12], mode=BUILD, duration=0:00:02.621, duration_ms=2621, data={name=echo_test, configuration=Debug, clean_build=false}
+timestamp=[2025-09-03 02:52:23], mode=BUILD, duration=0:00:02.575, duration_ms=2575, data={name=echo_test, configuration=Debug, clean_build=false}
+timestamp=[2025-09-03 02:55:29], mode=BUILD, duration=0:00:02.658, duration_ms=2658, data={name=echo_test, configuration=Debug, clean_build=false}
+timestamp=[2025-09-03 03:08:38], mode=BUILD, duration=0:00:03.357, duration_ms=3357, data={name=echo_test, configuration=Debug, clean_build=false}
+timestamp=[2025-09-03 03:08:54], mode=BUILD, duration=0:00:13.997, duration_ms=13997, data={name=echo_test_system, configuration=Debug, clean_build=false}
+timestamp=[2025-09-03 03:54:36], mode=WORKBENCH_START, duration=0:00:11.466, duration_ms=11466, data={}
+timestamp=[2025-09-03 03:54:36], mode=WORKBENCH_UI_INIT, duration=0:00:00.208, duration_ms=208, data={editors_count=32, platform_editors_count=8, projects_count=22, platform_projects_count=1, active_platform_editor=false, projects=RemoteSystemsTempFiles,echo_test,echo_test_system,lwip_matmult,lwip_matmult_system,lwip_test,lwip_test_system,matmult_ps,matmult_ps_system,pla,xaxidma_example_simple_intr_1,xaxidma_example_simple_intr_1_system,xgpio_intr_tapp_example_1,xgpio_intr_tapp_example_1_system,xscugic_example_1,xscugic_example_1_system,xscutimer_intr_example_1,xscutimer_intr_example_1_system,xscutimer_intr_example_2,xscutimer_intr_example_2_system,xtmrctr_intr_example_1,xtmrctr_intr_example_1_system}
+timestamp=[2025-09-03 03:54:37], mode=PLATFORM_REPOSITORY_INIT, duration=0:00:00.841, duration_ms=841, data={}
+timestamp=[2025-09-03 03:57:54], mode=BUILD, duration=0:00:04.125, duration_ms=4125, data={name=echo_test, configuration=Debug, clean_build=false}
+timestamp=[2025-09-03 08:05:25], mode=WORKBENCH_START, duration=0:00:15.874, duration_ms=15874, data={}
+timestamp=[2025-09-03 08:05:26], mode=WORKBENCH_UI_INIT, duration=0:00:00.470, duration_ms=470, data={editors_count=32, platform_editors_count=8, projects_count=22, platform_projects_count=1, active_platform_editor=false, projects=RemoteSystemsTempFiles,echo_test,echo_test_system,lwip_matmult,lwip_matmult_system,lwip_test,lwip_test_system,matmult_ps,matmult_ps_system,pla,xaxidma_example_simple_intr_1,xaxidma_example_simple_intr_1_system,xgpio_intr_tapp_example_1,xgpio_intr_tapp_example_1_system,xscugic_example_1,xscugic_example_1_system,xscutimer_intr_example_1,xscutimer_intr_example_1_system,xscutimer_intr_example_2,xscutimer_intr_example_2_system,xtmrctr_intr_example_1,xtmrctr_intr_example_1_system}
+timestamp=[2025-09-03 08:05:28], mode=PLATFORM_REPOSITORY_INIT, duration=0:00:01.463, duration_ms=1463, data={}
+timestamp=[2025-09-03 08:53:47], mode=WORKBENCH_START, duration=0:00:08.916, duration_ms=8916, data={}
+timestamp=[2025-09-03 08:53:47], mode=WORKBENCH_UI_INIT, duration=0:00:00.229, duration_ms=229, data={editors_count=32, platform_editors_count=8, projects_count=22, platform_projects_count=1, active_platform_editor=false, projects=RemoteSystemsTempFiles,echo_test,echo_test_system,lwip_matmult,lwip_matmult_system,lwip_test,lwip_test_system,matmult_ps,matmult_ps_system,pla,xaxidma_example_simple_intr_1,xaxidma_example_simple_intr_1_system,xgpio_intr_tapp_example_1,xgpio_intr_tapp_example_1_system,xscugic_example_1,xscugic_example_1_system,xscutimer_intr_example_1,xscutimer_intr_example_1_system,xscutimer_intr_example_2,xscutimer_intr_example_2_system,xtmrctr_intr_example_1,xtmrctr_intr_example_1_system}
+timestamp=[2025-09-03 08:53:48], mode=PLATFORM_REPOSITORY_INIT, duration=0:00:00.705, duration_ms=705, data={}
+timestamp=[2025-09-03 08:59:06], mode=PLATFORM_GENERATION, duration=0:03:15.113, duration_ms=195113, data={name=pla}
+timestamp=[2025-09-03 08:59:49], mode=BUILD, duration=0:00:12.547, duration_ms=12547, data={name=echo_test, configuration=Debug, clean_build=false}
+timestamp=[2025-09-03 09:00:18], mode=BUILD, duration=0:00:19.756, duration_ms=19756, data={name=echo_test_system, configuration=Debug, clean_build=false}
+timestamp=[2025-09-03 20:21:00], mode=BUILD, duration=0:00:00.444, duration_ms=444, data={name=echo_test, configuration=Debug, clean_build=true}
+timestamp=[2025-09-03 20:21:10], mode=BUILD, duration=0:00:10.082, duration_ms=10082, data={name=echo_test, configuration=Debug, clean_build=false}
+timestamp=[2025-09-03 20:21:24], mode=BUILD, duration=0:00:12.828, duration_ms=12828, data={name=echo_test_system, configuration=Debug, clean_build=false}
+timestamp=[2025-09-03 22:36:30], mode=PLATFORM_GENERATION, duration=0:01:41.636, duration_ms=101636, data={name=pla}
+timestamp=[2025-09-03 22:41:17], mode=BUILD, duration=0:00:04.962, duration_ms=4962, data={name=echo_test, configuration=Debug, clean_build=false}
+timestamp=[2025-09-03 22:42:23], mode=BUILD, duration=0:00:00.424, duration_ms=424, data={name=echo_test, configuration=Debug, clean_build=true}
+timestamp=[2025-09-03 22:42:34], mode=BUILD, duration=0:00:10.408, duration_ms=10408, data={name=echo_test, configuration=Debug, clean_build=false}
+timestamp=[2025-09-03 22:42:48], mode=BUILD, duration=0:00:13.098, duration_ms=13098, data={name=echo_test_system, configuration=Debug, clean_build=false}
+timestamp=[2025-09-04 00:18:01], mode=PLATFORM_GENERATION, duration=0:00:39.421, duration_ms=39421, data={name=pla}
+timestamp=[2025-09-04 00:19:56], mode=BUILD, duration=0:00:08.782, duration_ms=8782, data={name=echo_test, configuration=Debug, clean_build=false}
+timestamp=[2025-09-04 00:20:13], mode=BUILD, duration=0:00:11.783, duration_ms=11783, data={name=echo_test_system, configuration=Debug, clean_build=false}
+timestamp=[2025-09-04 00:37:21], mode=BUILD, duration=0:00:00.308, duration_ms=308, data={name=echo_test, configuration=Debug, clean_build=true}
+timestamp=[2025-09-04 00:37:27], mode=BUILD, duration=0:00:06.119, duration_ms=6119, data={name=echo_test, configuration=Debug, clean_build=false}
+timestamp=[2025-09-04 00:37:36], mode=BUILD, duration=0:00:07.653, duration_ms=7653, data={name=echo_test_system, configuration=Debug, clean_build=false}
+timestamp=[2025-09-04 01:13:02], mode=PLATFORM_GENERATION, duration=0:01:39.845, duration_ms=99845, data={name=pla}
+timestamp=[2025-09-04 01:14:28], mode=BUILD, duration=0:00:13.574, duration_ms=13574, data={name=echo_test, configuration=Debug, clean_build=false}
+timestamp=[2025-09-04 01:15:06], mode=BUILD, duration=0:00:20.202, duration_ms=20202, data={name=echo_test_system, configuration=Debug, clean_build=false}
+timestamp=[2025-09-04 01:30:41], mode=WORKBENCH_START, duration=0:03:50.625, duration_ms=230625, data={}
+timestamp=[2025-09-04 01:30:42], mode=WORKBENCH_UI_INIT, duration=0:00:00.455, duration_ms=455, data={editors_count=32, platform_editors_count=8, projects_count=22, platform_projects_count=1, active_platform_editor=true, projects=RemoteSystemsTempFiles,echo_test,echo_test_system,lwip_matmult,lwip_matmult_system,lwip_test,lwip_test_system,matmult_ps,matmult_ps_system,pla,xaxidma_example_simple_intr_1,xaxidma_example_simple_intr_1_system,xgpio_intr_tapp_example_1,xgpio_intr_tapp_example_1_system,xscugic_example_1,xscugic_example_1_system,xscutimer_intr_example_1,xscutimer_intr_example_1_system,xscutimer_intr_example_2,xscutimer_intr_example_2_system,xtmrctr_intr_example_1,xtmrctr_intr_example_1_system}
+timestamp=[2025-09-04 01:30:44], mode=PLATFORM_REPOSITORY_INIT, duration=0:00:01.276, duration_ms=1276, data={}
+timestamp=[2025-09-04 03:49:22], mode=WORKBENCH_START, duration=0:00:15.858, duration_ms=15858, data={}
+timestamp=[2025-09-04 03:49:24], mode=WORKBENCH_UI_INIT, duration=0:00:01.512, duration_ms=1512, data={editors_count=32, platform_editors_count=8, projects_count=22, platform_projects_count=1, active_platform_editor=true, projects=RemoteSystemsTempFiles,echo_test,echo_test_system,lwip_matmult,lwip_matmult_system,lwip_test,lwip_test_system,matmult_ps,matmult_ps_system,pla,xaxidma_example_simple_intr_1,xaxidma_example_simple_intr_1_system,xgpio_intr_tapp_example_1,xgpio_intr_tapp_example_1_system,xscugic_example_1,xscugic_example_1_system,xscutimer_intr_example_1,xscutimer_intr_example_1_system,xscutimer_intr_example_2,xscutimer_intr_example_2_system,xtmrctr_intr_example_1,xtmrctr_intr_example_1_system}
+timestamp=[2025-09-04 03:49:25], mode=PLATFORM_REPOSITORY_INIT, duration=0:00:01.236, duration_ms=1236, data={}
+timestamp=[2025-09-04 07:05:51], mode=WORKBENCH_START, duration=0:00:17.180, duration_ms=17180, data={}
+timestamp=[2025-09-04 07:05:52], mode=WORKBENCH_UI_INIT, duration=0:00:00.605, duration_ms=605, data={editors_count=32, platform_editors_count=8, projects_count=22, platform_projects_count=1, active_platform_editor=true, projects=RemoteSystemsTempFiles,echo_test,echo_test_system,lwip_matmult,lwip_matmult_system,lwip_test,lwip_test_system,matmult_ps,matmult_ps_system,pla,xaxidma_example_simple_intr_1,xaxidma_example_simple_intr_1_system,xgpio_intr_tapp_example_1,xgpio_intr_tapp_example_1_system,xscugic_example_1,xscugic_example_1_system,xscutimer_intr_example_1,xscutimer_intr_example_1_system,xscutimer_intr_example_2,xscutimer_intr_example_2_system,xtmrctr_intr_example_1,xtmrctr_intr_example_1_system}
+timestamp=[2025-09-04 07:05:53], mode=PLATFORM_REPOSITORY_INIT, duration=0:00:01.308, duration_ms=1308, data={}
+timestamp=[2025-09-04 07:16:56], mode=PLATFORM_GENERATION, duration=0:01:03.997, duration_ms=63997, data={name=pla}
+timestamp=[2025-09-04 07:17:13], mode=BUILD, duration=0:00:04.255, duration_ms=4255, data={name=echo_test, configuration=Debug, clean_build=false}
+timestamp=[2025-09-04 07:17:28], mode=BUILD, duration=0:00:13.603, duration_ms=13603, data={name=echo_test_system, configuration=Debug, clean_build=false}
+timestamp=[2025-09-04 08:28:00], mode=BUILD, duration=0:00:02.808, duration_ms=2808, data={name=echo_test, configuration=Debug, clean_build=false}
+timestamp=[2025-09-04 08:28:14], mode=BUILD, duration=0:00:12.977, duration_ms=12977, data={name=echo_test_system, configuration=Debug, clean_build=false}
+timestamp=[2025-09-04 23:41:53], mode=BUILD, duration=0:00:14.080, duration_ms=14080, data={name=echo_test, configuration=Debug, clean_build=false}
+timestamp=[2025-09-04 23:43:02], mode=BUILD, duration=0:00:02.122, duration_ms=2122, data={name=echo_test, configuration=Debug, clean_build=false}
+timestamp=[2025-09-05 00:01:05], mode=BUILD, duration=0:00:02.510, duration_ms=2510, data={name=echo_test, configuration=Debug, clean_build=false}
+timestamp=[2025-09-05 04:17:04], mode=WORKBENCH_START, duration=0:00:14.920, duration_ms=14920, data={}
+timestamp=[2025-09-05 04:17:06], mode=WORKBENCH_UI_INIT, duration=0:00:01.373, duration_ms=1373, data={editors_count=33, platform_editors_count=10, projects_count=22, platform_projects_count=1, active_platform_editor=false, projects=RemoteSystemsTempFiles,echo_test,echo_test_system,lwip_matmult,lwip_matmult_system,lwip_test,lwip_test_system,matmult_ps,matmult_ps_system,pla,xaxidma_example_simple_intr_1,xaxidma_example_simple_intr_1_system,xgpio_intr_tapp_example_1,xgpio_intr_tapp_example_1_system,xscugic_example_1,xscugic_example_1_system,xscutimer_intr_example_1,xscutimer_intr_example_1_system,xscutimer_intr_example_2,xscutimer_intr_example_2_system,xtmrctr_intr_example_1,xtmrctr_intr_example_1_system}
+timestamp=[2025-09-05 04:17:07], mode=PLATFORM_REPOSITORY_INIT, duration=0:00:01.259, duration_ms=1259, data={}
+timestamp=[2025-09-06 18:30:28], mode=WORKBENCH_START, duration=0:00:18.612, duration_ms=18612, data={}
+timestamp=[2025-09-06 18:30:30], mode=WORKBENCH_UI_INIT, duration=0:00:01.290, duration_ms=1290, data={editors_count=33, platform_editors_count=10, projects_count=22, platform_projects_count=1, active_platform_editor=false, projects=RemoteSystemsTempFiles,echo_test,echo_test_system,lwip_matmult,lwip_matmult_system,lwip_test,lwip_test_system,matmult_ps,matmult_ps_system,pla,xaxidma_example_simple_intr_1,xaxidma_example_simple_intr_1_system,xgpio_intr_tapp_example_1,xgpio_intr_tapp_example_1_system,xscugic_example_1,xscugic_example_1_system,xscutimer_intr_example_1,xscutimer_intr_example_1_system,xscutimer_intr_example_2,xscutimer_intr_example_2_system,xtmrctr_intr_example_1,xtmrctr_intr_example_1_system}
+timestamp=[2025-09-06 18:30:31], mode=PLATFORM_REPOSITORY_INIT, duration=0:00:01.335, duration_ms=1335, data={}
+timestamp=[2025-09-07 22:13:23], mode=PLATFORM_GENERATION, duration=0:18:20.904, duration_ms=1100904, data={name=pla}
+timestamp=[2025-09-07 22:15:07], mode=PLATFORM_GENERATION, duration=0:01:37.567, duration_ms=97567, data={name=pla}
+timestamp=[2025-09-07 22:15:20], mode=BUILD, duration=0:00:04.292, duration_ms=4292, data={name=echo_test, configuration=Debug, clean_build=false}
+timestamp=[2025-09-07 22:16:14], mode=BUILD, duration=0:00:00.659, duration_ms=659, data={name=echo_test, configuration=Debug, clean_build=false}
+timestamp=[2025-09-07 22:16:33], mode=BUILD, duration=0:00:05.406, duration_ms=5406, data={name=echo_test, configuration=Debug, clean_build=false}
+timestamp=[2025-09-07 22:38:31], mode=BUILD, duration=0:00:01.544, duration_ms=1544, data={name=echo_test, configuration=Debug, clean_build=false}
+timestamp=[2025-09-07 22:38:39], mode=BUILD, duration=0:00:07.609, duration_ms=7609, data={name=echo_test_system, configuration=Debug, clean_build=false}
+timestamp=[2025-09-08 01:14:57], mode=BUILD, duration=0:00:00.988, duration_ms=988, data={name=echo_test, configuration=Debug, clean_build=false}
+timestamp=[2025-09-08 01:24:52], mode=BUILD, duration=0:00:01.036, duration_ms=1036, data={name=echo_test, configuration=Debug, clean_build=false}
+timestamp=[2025-09-08 01:26:02], mode=BUILD, duration=0:00:01.487, duration_ms=1487, data={name=echo_test, configuration=Debug, clean_build=false}
+timestamp=[2025-09-08 01:29:20], mode=BUILD, duration=0:00:01.447, duration_ms=1447, data={name=echo_test, configuration=Debug, clean_build=false}
+timestamp=[2025-09-08 08:14:57], mode=BUILD, duration=0:00:01.689, duration_ms=1689, data={name=echo_test, configuration=Debug, clean_build=false}
+timestamp=[2025-09-08 08:18:06], mode=BUILD, duration=0:00:01.282, duration_ms=1282, data={name=echo_test, configuration=Debug, clean_build=false}
+timestamp=[2025-09-08 08:51:05], mode=BUILD, duration=0:00:01.302, duration_ms=1302, data={name=echo_test, configuration=Debug, clean_build=false}
+timestamp=[2025-09-08 19:02:31], mode=WORKBENCH_START, duration=0:00:08.403, duration_ms=8403, data={}
+timestamp=[2025-09-08 19:02:32], mode=WORKBENCH_UI_INIT, duration=0:00:00.446, duration_ms=446, data={editors_count=33, platform_editors_count=10, projects_count=22, platform_projects_count=1, active_platform_editor=false, projects=RemoteSystemsTempFiles,echo_test,echo_test_system,lwip_matmult,lwip_matmult_system,lwip_test,lwip_test_system,matmult_ps,matmult_ps_system,pla,xaxidma_example_simple_intr_1,xaxidma_example_simple_intr_1_system,xgpio_intr_tapp_example_1,xgpio_intr_tapp_example_1_system,xscugic_example_1,xscugic_example_1_system,xscutimer_intr_example_1,xscutimer_intr_example_1_system,xscutimer_intr_example_2,xscutimer_intr_example_2_system,xtmrctr_intr_example_1,xtmrctr_intr_example_1_system}
+timestamp=[2025-09-08 19:02:33], mode=PLATFORM_REPOSITORY_INIT, duration=0:00:00.798, duration_ms=798, data={}
+timestamp=[2025-09-08 20:32:12], mode=BUILD, duration=0:00:03.826, duration_ms=3826, data={name=echo_test, configuration=Debug, clean_build=false}
+timestamp=[2025-09-08 20:32:27], mode=BUILD, duration=0:00:13.620, duration_ms=13620, data={name=echo_test_system, configuration=Debug, clean_build=false}
+timestamp=[2025-09-08 20:35:18], mode=BUILD, duration=0:00:02.765, duration_ms=2765, data={name=echo_test, configuration=Debug, clean_build=false}
+timestamp=[2025-09-08 21:55:39], mode=BUILD, duration=0:00:03.482, duration_ms=3482, data={name=echo_test, configuration=Debug, clean_build=false}
+timestamp=[2025-09-08 21:59:53], mode=BUILD, duration=0:00:02.195, duration_ms=2195, data={name=echo_test, configuration=Debug, clean_build=false}
+timestamp=[2025-09-09 00:35:10], mode=BUILD, duration=0:00:24.567, duration_ms=24567, data={name=echo_test, configuration=Release, clean_build=false}

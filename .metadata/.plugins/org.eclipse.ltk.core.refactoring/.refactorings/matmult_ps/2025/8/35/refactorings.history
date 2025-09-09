@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Move &apos;echo.c&apos; to &apos;src&apos;" description="Move &apos;echo.c&apos; to &apos;src&apos;" destination="src" element1="/lwip_matmult/src/echo.c" flags="7" id="org.eclipse.ltk.core.refactoring.move.resources" resources="1" stamp="1756503111912" updateReferences="true"/>
+</session>

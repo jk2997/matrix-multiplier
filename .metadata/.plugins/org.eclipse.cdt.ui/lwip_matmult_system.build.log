@@ -1,0 +1,16 @@
+01:05:34 **** Incremental Build of configuration Debug for project lwip_matmult_system ****
+make all 
+Generating bif file for the system project
+generate_system_bif.bat 49761 C:/Xilinx/p/fm3/pla/export/pla/pla.xpfm standalone_domain C:/Xilinx/p/fm3/lwip_matmult_system/Debug/system.bif
+'\gnu\microblaze\lin\bin\' is not recognized as an internal or external command,
+operable program or batch file.
+'\gnu\microblaze\nt\bin\' is not recognized as an internal or external command,
+operable program or batch file.
+'\gnuwin\bin\' is not recognized as an internal or external command,
+operable program or batch file.
+sdcard_gen --xpfm C:/Xilinx/p/fm3/pla/export/pla/pla.xpfm --sys_config pla --bif C:/Xilinx/p/fm3/lwip_matmult_system/Debug/system.bif --bitstream C:/Xilinx/p/fm3/lwip_matmult/_ide/bitstream/matmult_xsa_2.bit --elf C:/Xilinx/p/fm3/lwip_matmult/Debug/lwip_matmult.elf,ps7_cortexa9_0
+creating BOOT.BIN using C:/Xilinx/p/fm3/lwip_matmult/_ide/bitstream/matmult_xsa_2.bit
+Running C:/Xilinx/Vitis/2024.1/bin/bootgen  -image C:/Xilinx/p/fm3/lwip_matmult_system/Debug/sd_card_temp/boot.bif -w -o i BOOT.BIN
+
+01:05:41 Build Finished (took 7s.305ms)
+
