@@ -38,7 +38,7 @@ The project is designed to work with a Windows PC and a Pynq-Z2 board and was bu
 5. Run the file_reader executable.
 6. Optionally, you can debug the PL using ILA by opening Vivado, programming the FPGA with the /pla/hw/matmult_6_xsa.bit, using Vitis to run the echo_test application project, setting the ILA to wait for trigger, and running the executable.
 
-See the demo.mp4 video for further details.
+See [demo](https://drive.google.com/file/d/106DrA1tERorIzCTXia8YBRUqK97_JR_A/view?usp=sharing) for further details.
 
 ## Future Work
 
